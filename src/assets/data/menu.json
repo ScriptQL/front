@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Users",
+        "redirect": "/dashboard"
+    },
+    {
+        "name": "Connections",
+        "redirect": "/dashboard/connections"
+    },
+    {
+        "name": "Settings",
+        "redirect": "/dashboard/settings"
+    },
+    {
+        "name": "History",
+        "redirect": "/dashboard/history"
+    }
+]

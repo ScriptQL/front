@@ -6,11 +6,11 @@ import {LoggedInGuard} from "./guards/logged-in.guard";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {
     path: 'dashboard',
-    loadChildren: () => import('./components/dashboard/dashboard.module').then(x => x.DashboardModule)
+    component: MainLayoutComponent,
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(x => x.DashboardModule)
   },
   {
     path: 'queries',
@@ -19,9 +19,13 @@ const routes: Routes = [
     loadChildren: () => import('./modules/query/query.module').then(x => x.QueryModule)
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login'
+  },
+  {
     path: '**',
-    component: NotFoundComponent,
-    pathMatch: 'full'
+    component: NotFoundComponent
   }
 ];
 

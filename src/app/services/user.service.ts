@@ -7,12 +7,12 @@ import { User } from '../interfaces/user';
 export class UserService {
 
   userList: User[] = [
-    {id: 1, name: 'Claudio', email: '', group: 'Manager', status: 'active'},
-    {id: 2, name: 'Tiago', email: '', group: 'Manager', status: 'active'},
-    {id: 3, name: 'Zanatta', email: 'teste@teste.com', group: 'trainee', status: 'inactive'},
-    {id: 4, name: 'Fabricio', email: '', group: 'Manager', status: 'active'},
-    {id: 5, name: 'Schneider', email: '', group: 'Manager', status: 'active'},
-    {id: 6, name: 'Ruan', email: '', group: 'Manager', status: 'inactive'},
+    {id: '1', name: 'Claudio', email: '', group: 'Manager', status: 'active'},
+    {id: '2', name: 'Tiago', email: '', group: 'Manager', status: 'active'},
+    {id: '3', name: 'Zanatta', email: 'teste@teste.com', group: 'trainee', status: 'inactive'},
+    {id: '4', name: 'Fabricio', email: '', group: 'Manager', status: 'active'},
+    {id: '5', name: 'Schneider', email: '', group: 'Manager', status: 'active'},
+    {id: '6', name: 'Ruan', email: '', group: 'Manager', status: 'inactive'},
   ];
 
   constructor() { }
@@ -27,5 +27,5 @@ export class UserService {
 
   createUser(user: User) {
     this.userList.unshift(user);
-  }  
+  }
 }

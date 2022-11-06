@@ -1,12 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-//Module
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-//Angular Material
-import { MatSliderModule } from '@angular/material/slider';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,11 +17,24 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
+import {UserDetailsComponent} from './components/user-details/user-details.component';
+import {RouterModule} from "@angular/router";
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    UserDetailsComponent,
+    TruncatePipe
+  ],
   imports: [
+    // Angular
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+
+    // Material
+    MatIconModule,
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
@@ -45,7 +54,14 @@ import {MatSelectModule} from '@angular/material/select';
     MatSelectModule,
   ],
   exports: [
+    // Angular
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+
+    // Material
+    MatIconModule,
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
@@ -63,6 +79,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
+    UserDetailsComponent,
+    TruncatePipe,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  
+
   form: FormGroup;
 
   groups: any[] = [
@@ -34,13 +34,13 @@ export class AddUserComponent implements OnInit {
 
   createUser() {
     const user: User = {
-      id: 1,
+      id: '1',
       name: this.form.value.userName,
       email: this.form.value.userEmail,
       group: this.form.value.userGroup,
       status: 'active'
     }
-    
+
     this._userService.createUser(user);
     this.router.navigate(['/dashboard'])
   }

@@ -1,0 +1,61 @@
+@use 'themes/layout';
+@use 'themes/sections';
+
+:root {
+  --navbar-height: 63px;
+
+  --color-primary: #673ab7;
+  --color-green: #2EA52C;
+  --color-yellow: #ffc100;
+  --color-blue: cornflowerblue;
+
+  // Background
+  --background-primary: #F3F5F7;
+  --background-secondary: #FFFFFF;
+  --background-tertiary: #F8F9FA;
+
+  // Border
+  --border-primary: rgba(0, 0, 0, .12);
+  --border-secondary: rgba(0, 0, 0, 0.06);
+
+  // Foreground
+  --text-primary: #000000;
+  --text-secondary: #4f545c;
+  --text-tertiary: #EEAAEE;
+
+  // Colors
+  --color-error: #CF6679;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.5715;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  margin: 0;
+  background: var(--background-primary);
+  color: var(--text-primary);
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.push {
+  margin-left: auto;
+}
+
+// Angular material lacks a form template...
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

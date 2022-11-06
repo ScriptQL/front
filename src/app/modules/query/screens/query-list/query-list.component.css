@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+.mat-column-status {
+  width: 32px;
+  padding: 16px;
+}
+
+.mat-column-requester {
+  width: 400px;
+  padding-left: 16px;
+  border-left: 1px solid var(--border-primary);
+}
+
+.mat-column-more {
+  width: 32px;
+  text-align: center;
+}

@@ -1,0 +1,18 @@
+<div class="layout">
+  <div>
+    <mat-toolbar color="primary">
+      <span class="home" (click)="onHome()">ScriptSQL</span>
+      <div class="push"></div>
+      <button mat-button routerLink="/users">Users</button>
+      <button mat-button routerLink="/queries">Queries</button>
+      <button mat-icon-button (click)="onLogout()" aria-label="Logout">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+  <div class="page">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

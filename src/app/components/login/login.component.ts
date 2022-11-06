@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {AuthService} from "../../services/auth.service";
+import {FormService} from "../../services/form.service";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +15,16 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
-    this.form = this.fb.group({
+  constructor(
+    private forms: FormService,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+    private service: AuthService) {
+    this.form = this.forms.group({
       user: ['', Validators.required],
       password: ['', Validators.required],
-    })
-   }
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -26,30 +32,28 @@ export class LoginComponent implements OnInit {
   singIn() {
     const user = this.form.value.user;
     const pswd = this.form.value.password;
-
-    if(user == 'adm' && pswd == 'adm') {
-      this.loadingTime();
-
-    } else {
-      this.error();
-      this.form.reset();
-    }
-
+    this.loading = true;
+    this.service.login({
+      email: user,
+      password: pswd
+    }).subscribe({
+      next: (data) => {
+        this.router.navigate(['dashboard']).finally();
+      },
+      error: (error) => {
+        this.error(error.error.message);
+        this.form.reset();
+      }
+    });
   }
 
-  error() {
-    this._snackBar.open('User or password insert incorrectly','', {
+  error(message: string) {
+    this.loading = false;
+    this._snackBar.open(message, '', {
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     })
-  }
-
-  loadingTime() {
-    this.loading = true;
-    setTimeout(() => { 
-      this.router.navigate(['dashboard'])
-    }, 1200)
   }
 
 }

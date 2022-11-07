@@ -1,0 +1,143 @@
+.details {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  > .left {
+    width: 80%;
+
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  > .right {
+    width: 20%;
+
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.left {
+  > .header {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-primary);
+
+    > .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    > .extra {
+      margin-left: auto;
+    }
+  }
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  > .approval {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    > .submitter {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+
+      > .user {
+        padding-right: 8px;
+        border-right: 1px solid var(--border-primary);
+      }
+
+      > .created {
+        color: var(--text-secondary);
+      }
+    }
+
+    > .buttons {
+      gap: 8px;
+      display: flex;
+      flex-direction: row;
+      margin-left: auto;
+    }
+  }
+
+  > .description {
+    padding: 16px 16px 0;
+    background: var(--background-secondary);
+  }
+
+  > .query {
+    > code {
+      padding: 16px;
+    }
+  }
+}
+
+.right {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+
+  > .datasource {
+    padding: 16px;
+    background: var(--background-secondary);
+
+    > .header {
+      font-size: 18px;
+      border-bottom: 1px solid var(--border-primary);
+      padding-bottom: 8px;
+    }
+
+    > .content {
+      gap: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 16px;
+    }
+  }
+
+  > .approvers {
+    padding: 16px;
+    background: var(--background-secondary);
+
+    > .header {
+      font-size: 18px;
+      border-bottom: 1px solid var(--border-primary);
+      padding-bottom: 8px;
+    }
+
+    > .users {
+      gap: 4px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 8px;
+
+      > .user {
+        gap: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        > .icon {
+
+        }
+
+        > .name {
+
+        }
+      }
+    }
+  }
+}

@@ -3,8 +3,6 @@ import {QueryService} from "../../../../services/query.service";
 import {Query} from "../../../../interfaces/query";
 import {Page} from "../../../../interfaces/page";
 import {PageEvent} from "@angular/material/paginator";
-import {MatDialog} from "@angular/material/dialog";
-import {CreateQueryModal} from "../../modals/create-query-modal/create-query-modal.component";
 
 @Component({
   selector: 'app-query-list',
@@ -13,12 +11,11 @@ import {CreateQueryModal} from "../../modals/create-query-modal/create-query-mod
 })
 export class QueryListComponent implements OnInit {
 
-  columns: string[] = ['status', 'requester', 'description', 'connection', 'more'];
+  columns: string[] = ['status', 'requester', 'title', 'description', 'connection', 'more'];
   data: Page<Query> = new Page<Query>();
 
   constructor(
-    private service: QueryService,
-    public dialog: MatDialog) {
+    private service: QueryService) {
   }
 
   ngOnInit(): void {
@@ -39,17 +36,6 @@ export class QueryListComponent implements OnInit {
       error: (error) => {
         console.error(error);
       }
-    });
-  }
-
-  onNew(): void {
-    this.dialog.open(CreateQueryModal, {
-      minWidth: '40vw'
-    }).afterClosed().subscribe(data => {
-      if (!data) {
-        return;
-      }
-      this.onPage();
     });
   }
 

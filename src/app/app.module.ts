@@ -10,7 +10,8 @@ import {LoginComponent} from './components/login/login.component';
 import {MainLayoutComponent} from './components/main-layout/main-layout.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./guards/auth.interceptor";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

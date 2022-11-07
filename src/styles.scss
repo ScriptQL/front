@@ -1,6 +1,8 @@
 @use 'themes/layout';
 @use 'themes/sections';
 
+@import '~highlight.js/styles/github.css';
+
 :root {
   --navbar-height: 63px;
 

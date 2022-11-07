@@ -4,7 +4,7 @@
       Recentes
     </div>
     <div class="extra">
-      <button mat-raised-button (click)="onNew()">
+      <button mat-raised-button routerLink="/queries/create">
         <mat-icon fontIcon="add_task"></mat-icon>
         <span>&nbsp;&nbsp;Nova Query</span>
       </button>
@@ -58,6 +58,12 @@
           <td mat-cell *matCellDef="let element">
             <shared-user-details [user]="element.requester"></shared-user-details>
           </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Titulo</th>
+          <td mat-cell *matCellDef="let element">{{element.title | truncate:[20]}}</td>
         </ng-container>
 
         <!-- Description Column -->

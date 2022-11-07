@@ -19,12 +19,22 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {RouterModule} from "@angular/router";
-import { TruncatePipe } from './pipes/truncate.pipe';
+import {TruncatePipe} from './pipes/truncate.pipe';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
+import {MarkdownModule} from "ngx-markdown";
+import { SnowflakeTimePipe } from './pipes/snowflake-time.pipe';
+import { UnixTimePipe } from './pipes/unix-time.pipe';
+import { DataSourceSelectComponent } from './components/data-source-select/data-source-select.component';
+import { RoleSelectComponent } from './components/role-select/role-select.component';
 
 @NgModule({
   declarations: [
     UserDetailsComponent,
-    TruncatePipe
+    TruncatePipe,
+    SnowflakeTimePipe,
+    UnixTimePipe,
+    DataSourceSelectComponent,
+    RoleSelectComponent
   ],
   imports: [
     // Angular
@@ -32,6 +42,10 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+
+    // Dependencies
+    HighlightModule,
+    MarkdownModule.forRoot(),
 
     // Material
     MatIconModule,
@@ -60,6 +74,10 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     ReactiveFormsModule,
     RouterModule,
 
+    // Dependencies
+    HighlightModule,
+    MarkdownModule,
+
     // Material
     MatIconModule,
     MatSliderModule,
@@ -81,6 +99,21 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     MatSelectModule,
     UserDetailsComponent,
     TruncatePipe,
+    SnowflakeTimePipe,
+    DataSourceSelectComponent,
+    RoleSelectComponent,
+  ],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
+        languages: {
+          sql: () => import('highlight.js/lib/languages/sql')
+        }
+      }
+    }
   ]
 })
 export class SharedModule {

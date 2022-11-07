@@ -1,0 +1,107 @@
+<div class="details" *ngIf="query$ | async as query">
+  <div class="left">
+    <div class="header">
+      <div class="title">{{ query.title }}</div>
+      <div class="extra">
+        <span *ngIf="query.status === 'WAITING_REVIEW'">
+              <mat-icon aria-hidden="false" fontIcon="how_to_reg"
+                        matTooltip="Awaiting approval"
+                        aria-label="Awaiting approval"
+              ></mat-icon>
+            </span>
+        <span *ngIf="query.status === 'APPROVED'">
+              <mat-icon aria-hidden="false" fontIcon="hourglass_empty"
+                        matTooltip="Awaiting execution"
+                        aria-label="Awaiting execution"
+              ></mat-icon>
+            </span>
+        <span *ngIf="query.status === 'REJECTED'">
+              <mat-icon aria-hidden="false" fontIcon="close"
+                        matTooltip="Rejected"
+                        aria-label="Rejected"
+              ></mat-icon>
+            </span>
+        <span *ngIf="query.status === 'EXECUTING'">
+              <mat-icon aria-hidden="false" fontIcon="cycle"
+                        matTooltip="Executing"
+                        aria-label="Executing"
+              ></mat-icon>
+            </span>
+        <span *ngIf="query.status === 'DONE'">
+              <mat-icon aria-hidden="false" fontIcon="check"
+                        matTooltip="Executed successfully"
+                        aria-label="Executed successfully"
+              ></mat-icon>
+            </span>
+      </div>
+    </div>
+    <div class="content approval">
+      <div class="submitter">
+        <div class="user">
+          <shared-user-details [user]="query.requester"></shared-user-details>
+        </div>
+        <div class="created" [matTooltip]="query.id | SnowflakeTime: 'full'">
+          Criado {{ query.id | SnowflakeTime: 'relative' }}
+        </div>
+      </div>
+      <div class="buttons">
+        <button mat-raised-button color="accent" (click)="onReview(query, true)"
+                *ngIf="query.status === 'WAITING_REVIEW'">Aprovar
+        </button>
+        <button mat-raised-button color="warn" (click)="onReview(query, false)"
+                *ngIf="query.status === 'WAITING_REVIEW'">Rejeitar
+        </button>
+        <button mat-raised-button color="primary" (click)="onExecute()"
+                *ngIf="query.status === 'APPROVED'">Executar
+        </button>
+        <button mat-raised-button color="primary" (click)="onDownload()"
+                *ngIf="query.status === 'DONE'">Baixar Resultado
+        </button>
+      </div>
+    </div>
+    <div class="content description">
+      <markdown
+        [data]="query.description">
+      </markdown>
+    </div>
+    <div class="content query">
+      <code [highlight]="query.query" [lineNumbers]="true"></code>
+    </div>
+  </div>
+  <div class="right">
+    <div class="datasource">
+      <div class="header">
+        Banco de Dados
+      </div>
+      <div class="content">
+        <div>
+          <mat-icon fontIcon="menu"></mat-icon>
+        </div>
+        <div>
+          <a routerLink="/connections/{{ query.connection.id }}">
+            {{ query.connection.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="approvers" *ngIf="reviews$ | async as reviews">
+      <div class="header">
+        Aprovadores
+      </div>
+      <div class="users">
+        <div class="user" *ngFor="let review of reviews.items">
+          <div class="icon">
+            <i class="material-icons material-icons-outlined"
+               *ngIf="review.accepted">check_circle</i>
+            <i class="material-icons material-icons-outlined"
+               *ngIf="review.accepted == null">circle</i>
+            <i class="material-icons material-icons-outlined"
+               *ngIf="review.accepted == false">cancel</i>
+          </div>
+          <div class="name">{{ review.user.name }}</div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>

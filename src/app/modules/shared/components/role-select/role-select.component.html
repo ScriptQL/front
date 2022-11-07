@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Role</mat-label>
+  <mat-select *ngIf="roles$ | async as page" [(value)]="selected" (valueChange)="onUpdate($event)">
+    <mat-option *ngFor="let role of page.items" [value]="role">
+      {{ role.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

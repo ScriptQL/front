@@ -19,6 +19,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/query/query.module').then(x => x.QueryModule)
   },
   {
+    path: 'connections',
+    component: MainLayoutComponent,
+    canActivate: [LoggedInGuard],
+    loadChildren: () => import('./modules/data-source/data-source.module').then(x => x.DataSourceModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'

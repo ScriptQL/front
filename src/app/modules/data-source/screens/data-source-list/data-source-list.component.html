@@ -1,0 +1,63 @@
+<div class="section">
+  <div class="header">
+    <div class="title">
+      Data Sources
+    </div>
+    <div class="extra">
+      <button mat-icon-button (click)="onAdd()">
+        <mat-icon fontIcon="add"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="data.items">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Driver Column -->
+        <ng-container matColumnDef="driver">
+          <th mat-header-cell *matHeaderCellDef>Driver</th>
+          <td mat-cell *matCellDef="let element">{{ element.driver }}</td>
+        </ng-container>
+
+        <!-- Host Column -->
+        <ng-container matColumnDef="host">
+          <th mat-header-cell *matHeaderCellDef>Host</th>
+          <td mat-cell *matCellDef="let element">{{ element.host }}</td>
+        </ng-container>
+
+        <!-- Database Column -->
+        <ng-container matColumnDef="database">
+          <th mat-header-cell *matHeaderCellDef>Banco de Dados</th>
+          <td mat-cell *matCellDef="let element">{{ element.database }}</td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="more">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-icon aria-hidden="false" aria-label="More" fontIcon="more_horiz"></mat-icon>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button routerLink="/connections/{{ element.id }}">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      </table>
+      <mat-paginator [pageSize]="data.limit"
+                     [pageIndex]="data.page - 1"
+                     (page)="onPage($event)"
+                     [length]="data.total"
+                     showFirstLastButtons
+                     aria-label="Update list page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

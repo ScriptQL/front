@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>
+  {{ existing ? 'Editar DataSource' : 'Novo DataSource' }}
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Host</mat-label>
+      <input type="text" matInput formControlName="host">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Porta</mat-label>
+      <input type="number" matInput formControlName="port">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Banco de Dados</mat-label>
+      <input type="text" matInput formControlName="database">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSave()">Salvar</button>
+</div>

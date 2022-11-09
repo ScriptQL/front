@@ -1,20 +1,21 @@
-<div class="body">
+<div class="login-body">
     <div class="login">
         <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
 
+        <p class="login-application-name">ScriptQL</p>
+        <img class="login-image" src="./assets/img/user.png" width="50%">
+        <p class="login-text">Realize o login para acessar a aplicação</p>
         <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="singIn()">
-            <img src="./assets/img/user.png" width="50%">
-            <p>Login</p>
             <mat-form-field class="userInput" appearance="fill">
                 <mat-label>Email</mat-label>
                 <input type="text" matInput formControlName="user">
             </mat-form-field>
             <mat-form-field class="userInput" appearance="fill">
-                <mat-label>Password</mat-label>
+                <mat-label>Senha</mat-label>
                 <input type="password" matInput formControlName="password">
             </mat-form-field>
             <br>
-            <button type="submit" class="userInput button" mat-raised-button [disabled]="form.invalid">Sing in</button>
+            <button type="submit" class="userInput button" mat-raised-button [disabled]="form.invalid">Entrar</button>
         </form>
     </div>
 </div>

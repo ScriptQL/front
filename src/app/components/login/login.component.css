@@ -1,19 +1,37 @@
-.body {
+.login-body {
     display: flex;
     justify-content: center;
     height: 100vh;
     align-items: center;
-    background-color: darkgray;
 }
 
 .login {
     width: 100%;
-    max-width: 330px;
+    max-width: 420px;
     text-align: center;
+    padding: 30px;
+    border: solid black 1px;
+    border-radius: 15px;
+}
+
+.login-application-name {
+    font-family: 'Stick No Bills', Roboto, 'Courier New', Courier, monospace;
+    font-size: 55px;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+    transform: rotate(-4deg);
+}
+
+.login-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .userInput {
-    width: 80%;
+    width: 100%;
 }
 
 .button {

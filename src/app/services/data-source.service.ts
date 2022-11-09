@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Page} from "../interfaces/page";
 import {environment} from "../../environments/environment";
 import {DataSource} from "../interfaces/data-source";
+import {Role} from "../interfaces/role";
 
 const routes = {
   search: (page: number, filter: string) =>
@@ -14,7 +15,13 @@ const routes = {
   patch: (id: string) =>
     `${environment.api_url}/connections/${id}`,
   create: () =>
-    `${environment.api_url}/connections`
+    `${environment.api_url}/connections`,
+  fetchReviewers: (id: string) =>
+    `${environment.api_url}/connections/${id}/reviewers`,
+  addReviewer: (id: string) =>
+    `${environment.api_url}/connections/${id}/reviewers`,
+  deleteReviewer: (id: string, role: string) =>
+    `${environment.api_url}/connections/${id}/reviewers/${role}`
 };
 
 @Injectable({
@@ -43,4 +50,17 @@ export class DataSourceService {
   public create(body: any): Observable<DataSource> {
     return this.http.post<DataSource>(routes.create(), body);
   }
+
+  public fetchReviewers(id: string): Observable<Role[]> {
+    return this.http.get<Role[]>(routes.fetchReviewers(id));
+  }
+
+  public addReviewer(id: string, data: Role): Observable<any> {
+    return this.http.post<any>(routes.addReviewer(id), data);
+  }
+
+  public deleteReviewer(id: string, role: Role): Observable<any> {
+    return this.http.delete<any>(routes.deleteReviewer(id, role.id));
+  }
+
 }

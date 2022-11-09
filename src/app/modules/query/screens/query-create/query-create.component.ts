@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {AddReviewerRoleModal} from "../../modals/add-reviewer-role-modal/add-reviewer-role-modal.component";
 import {DataSource} from "../../../../interfaces/data-source";
+import {DataSourceService} from "../../../../services/data-source.service";
 
 @Component({
   selector: 'app-query-create',
@@ -26,6 +27,7 @@ export class QueryCreateComponent implements OnInit {
     private service: QueryService,
     private router: Router,
     private dialog: MatDialog,
+    private connections: DataSourceService,
   ) {
     this.form = this.forms.group({
       title: ['', [
@@ -94,6 +96,15 @@ export class QueryCreateComponent implements OnInit {
   onDataSource($event: DataSource): void {
     const control = this.form.controls['connection'];
     control.patchValue($event.id);
+
+    this.connections.fetchReviewers($event.id).subscribe({
+      next: (data) => {
+        data.forEach(role => this.reviewers.push(role));
+      },
+      error: (error) => {
+        this.showError(error.error?.message);
+      }
+    });
   }
 
 }

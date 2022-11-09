@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       password: pswd
     }).subscribe({
       next: (data) => {
-        this.router.navigate(['dashboard']).finally();
+        this.router.navigate(['queries']).finally();
       },
       error: (error) => {
         this.error(error.error.message);

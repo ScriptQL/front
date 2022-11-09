@@ -8,11 +8,6 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {
-    path: 'dashboard',
-    component: MainLayoutComponent,
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then(x => x.DashboardModule)
-  },
-  {
     path: 'queries',
     component: MainLayoutComponent,
     canActivate: [LoggedInGuard],
@@ -23,6 +18,12 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [LoggedInGuard],
     loadChildren: () => import('./modules/data-source/data-source.module').then(x => x.DataSourceModule)
+  },
+  {
+    path: 'users',
+    component: MainLayoutComponent,
+    canActivate: [LoggedInGuard],
+    loadChildren: () => import('./modules/users/users.module').then(x => x.UsersModule)
   },
   {
     path: '',

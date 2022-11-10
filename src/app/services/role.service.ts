@@ -14,7 +14,9 @@ const routes = {
   patch: (id: string) =>
     `${environment.api_url}/roles/${id}`,
   create: () =>
-    `${environment.api_url}/roles`
+    `${environment.api_url}/roles`,
+  delete: (id: string) => 
+    `${environment.api_url}/roles/${id}` 
 };
 
 @Injectable({
@@ -42,6 +44,10 @@ export class RoleService {
 
   public create(body: any): Observable<Role> {
     return this.http.post<Role>(routes.create(), body);
+  }
+
+  public delete(id: string): Observable<void> {
+    return this.http.delete<void>(routes.delete(id));
   }
 
 }

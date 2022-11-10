@@ -51,4 +51,11 @@ export class RoleListComponent implements OnInit {
     });
   }
 
+  deleteRole(id: string) {
+    this.service.delete(id).subscribe({
+      next: () => this.onPage(),
+      error: error => console.error(error)
+    });
+  }
+
 }

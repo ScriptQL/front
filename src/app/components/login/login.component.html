@@ -8,11 +8,11 @@
         <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="singIn()">
             <mat-form-field class="userInput" appearance="fill">
                 <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="user">
+                <input type="text" name="email" matInput formControlName="user">
             </mat-form-field>
             <mat-form-field class="userInput" appearance="fill">
                 <mat-label>Senha</mat-label>
-                <input type="password" matInput formControlName="password">
+                <input type="password" name="password" matInput formControlName="password">
             </mat-form-field>
             <br>
             <button type="submit" class="userInput button" mat-raised-button [disabled]="form.invalid">Entrar</button>

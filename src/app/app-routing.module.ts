@@ -26,6 +26,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/users/users.module').then(x => x.UsersModule)
   },
   {
+    path: 'roles',
+    component: MainLayoutComponent,
+    canActivate: [LoggedInGuard],
+    loadChildren: () => import('./modules/roles/roles.module').then(x => x.RolesModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'

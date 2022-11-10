@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from "../../../../interfaces/page";
 import {MatDialog} from "@angular/material/dialog";
 import {PageEvent} from "@angular/material/paginator";
-import {EditDataSourceModal} from "../../../data-source/modals/edit-data-source-modal/edit-data-source-modal.component";
+import {Page} from "../../../../interfaces/page";
+import { EditRoleModal } from './../edit-role-modal/edit-role-modal.component';
 import { Role } from './../../../../interfaces/role';
 import { RoleService } from './../../../../services/role.service';
 
@@ -41,7 +41,7 @@ export class RoleListComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.dialog.open(EditDataSourceModal, {
+    this.dialog.open(EditRoleModal, {
       width: '420px'
     }).afterClosed().subscribe(data => {
       if (!data) {

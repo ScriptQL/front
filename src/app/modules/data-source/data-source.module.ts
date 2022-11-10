@@ -19,14 +19,14 @@ import { AddReviewerModal } from './modals/add-reviewer-modal/add-reviewer-modal
     DataSourceReviewersComponent,
     AddReviewerModal
   ],
-    imports: [
-        SharedModule,
-        DataSourceRoutingModule,
+  imports: [
+      SharedModule,
+      DataSourceRoutingModule,
 
-        // Material
-        MatDialogModule,
-        MatTabsModule,
-    ]
+      // Material
+      MatDialogModule,
+      MatTabsModule,
+  ]
 })
 export class DataSourceModule {
 }

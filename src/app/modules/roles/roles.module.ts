@@ -3,12 +3,14 @@ import { SharedModule } from './../shared/shared.module';
 import { RolesRoutingModule } from './roles-routing.module';
 import { RoleListComponent } from './screens/role-list/role-list.component';
 import { NgModule } from '@angular/core';
+import { EditRoleModal } from './screens/edit-role-modal/edit-role-modal.component';
 
 
 
 @NgModule({
   declarations: [
-    RoleListComponent
+    RoleListComponent,
+    EditRoleModal
   ],
   imports: [
     SharedModule,

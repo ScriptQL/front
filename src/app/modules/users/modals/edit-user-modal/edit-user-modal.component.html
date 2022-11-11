@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>
+  {{ existing ? 'Editar Usuário' : 'Novo Usuário' }}
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input type="text" matInput formControlName="email">
+    </mat-form-field>
+
+    <shared-multiple-role-select (onUpdated)="onUpdateRole($event)"></shared-multiple-role-select>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Grupos de acesso (separe por vírgula)</mat-label>
+      <input type="text" matInput formControlName="roles">
+    </mat-form-field> -->
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSave()">Salvar</button>
+</div>

@@ -1,3 +1,4 @@
+import { EditUserModal } from './modals/edit-user-modal/edit-user-modal.component';
 import {NgModule} from '@angular/core';
 
 import {UsersRoutingModule} from './users-routing.module';
@@ -8,7 +9,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    UserListComponent
+    UserListComponent,
+    EditUserModal
   ],
   imports: [
     SharedModule,

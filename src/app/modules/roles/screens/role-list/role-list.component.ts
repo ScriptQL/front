@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {PageEvent} from "@angular/material/paginator";
 import {Page} from "../../../../interfaces/page";
-import { EditRoleModal } from './../edit-role-modal/edit-role-modal.component';
+import { EditRoleModal } from '../../modals/edit-role-modal/edit-role-modal.component';
 import { Role } from './../../../../interfaces/role';
 import { RoleService } from './../../../../services/role.service';
 

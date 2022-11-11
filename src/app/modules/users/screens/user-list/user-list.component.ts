@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Page} from "../../../../interfaces/page";
 import {MatDialog} from "@angular/material/dialog";
 import {PageEvent} from "@angular/material/paginator";
-import {EditDataSourceModal} from "../../../data-source/modals/edit-data-source-modal/edit-data-source-modal.component";
+import { EditUserModal } from './../../modals/edit-user-modal/edit-user-modal.component';
 import {UserService} from "../../../../services/user.service";
 import {User} from "../../../../interfaces/user";
 
@@ -43,7 +43,7 @@ export class UserListComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.dialog.open(EditDataSourceModal, {
+    this.dialog.open(EditUserModal, {
       width: '420px'
     }).afterClosed().subscribe(data => {
       if (!data) {
@@ -51,6 +51,10 @@ export class UserListComponent implements OnInit {
       }
       location.reload();
     });
+  }
+
+  editUser(id: string): void {
+    console.log(id);
   }
 
 }

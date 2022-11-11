@@ -1,3 +1,5 @@
+import { ChangePasswordModal } from './../modals/change-password/change-password-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
@@ -11,7 +13,8 @@ export class MainLayoutComponent {
 
   constructor(
     private router: Router,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private dialog: MatDialog) {
   }
 
   onHome(): void {
@@ -22,4 +25,14 @@ export class MainLayoutComponent {
     this.auth.logout();
   }
 
+  changePassword(): void {
+    this.dialog.open(ChangePasswordModal, {
+      width: '420px'
+    }).afterClosed().subscribe(data => {
+      if (!data) {
+        return;
+      }
+      location.reload();
+    });
+  }
 }

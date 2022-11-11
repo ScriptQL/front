@@ -26,7 +26,6 @@ import { SnowflakeTimePipe } from './pipes/snowflake-time.pipe';
 import { UnixTimePipe } from './pipes/unix-time.pipe';
 import { DataSourceSelectComponent } from './components/data-source-select/data-source-select.component';
 import { RoleSelectComponent } from './components/role-select/role-select.component';
-import { MultipleRoleSelectComponent } from './components/multiple-role-select/multiple-role-select.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { MultipleRoleSelectComponent } from './components/multiple-role-select/m
     SnowflakeTimePipe,
     UnixTimePipe,
     DataSourceSelectComponent,
-    RoleSelectComponent,
-    MultipleRoleSelectComponent
+    RoleSelectComponent
   ],
   imports: [
     // Angular
@@ -103,8 +101,7 @@ import { MultipleRoleSelectComponent } from './components/multiple-role-select/m
     TruncatePipe,
     SnowflakeTimePipe,
     DataSourceSelectComponent,
-    RoleSelectComponent,
-    MultipleRoleSelectComponent
+    RoleSelectComponent
   ],
   providers: [
     {

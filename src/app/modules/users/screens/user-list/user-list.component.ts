@@ -54,7 +54,20 @@ export class UserListComponent implements OnInit {
   }
 
   editUser(id: string): void {
-    console.log(id);
+    this.service.findById(id).subscribe({
+      next: (user) => {
+        this.dialog.open(EditUserModal, {
+          width: '420px',
+          data: user
+        }).afterClosed().subscribe(data => {
+          if (!data) {
+            return;
+          }
+          location.reload();
+        });
+      },
+      error: err => console.error(err)
+    });
   }
 
 }

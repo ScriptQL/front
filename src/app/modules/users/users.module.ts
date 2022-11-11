@@ -6,7 +6,6 @@ import {UserListComponent} from './screens/user-list/user-list.component';
 import {SharedModule} from "../shared/shared.module";
 import {MatDialogModule} from "@angular/material/dialog";
 
-
 @NgModule({
   declarations: [
     UserListComponent,

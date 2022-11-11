@@ -1,3 +1,5 @@
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChangePasswordModal } from './components/modals/change-password/change-password-modal.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
@@ -18,13 +20,17 @@ import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
     AppComponent,
     LoginComponent,
     MainLayoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ChangePasswordModal
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+
+    // material
+    MatDialogModule
   ],
   exports: [
     SharedModule

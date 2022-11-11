@@ -1,3 +1,4 @@
+import { Role } from './../../../../interfaces/role';
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormGroup, Validators} from "@angular/forms";
@@ -33,7 +34,10 @@ export class EditUserModal {
       email: [data?.email, [
         Validators.required
       ]],
-      roles: [data?.roles]
+      roles: [data?.roles?.map(r => r.name)],
+      password: [data?.password, [
+        Validators.required
+      ]]
     });
   }
 
@@ -41,18 +45,13 @@ export class EditUserModal {
     this.dialogRef.close();
   }
 
-  onUpdateRole(event): void {
-    this.form.patchValue({
-      roles: [event.map(e => e.id)]
-    })
-  }
-
   onSave(): void {
     if (!this.fb.check(this.form)) {
       return;
     }
     this.fb.setLoading(this.form, (this.loading = true));
-    const request = this.form.getRawValue();
+    let request = this.form.getRawValue();
+    request.roles = request.roles.split(",");
     let http: Observable<User>;
     if (this.existing) {
       http = this.service.patch(this.existing.id, request);

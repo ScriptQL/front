@@ -1,4 +1,3 @@
-import { Role } from './../../../../interfaces/role';
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormGroup, Validators} from "@angular/forms";
@@ -34,7 +33,6 @@ export class EditUserModal {
       email: [data?.email, [
         Validators.required
       ]],
-      roles: [data?.roles?.map(r => r.name)],
       password: [data?.password, [
         Validators.required
       ]]
@@ -50,8 +48,7 @@ export class EditUserModal {
       return;
     }
     this.fb.setLoading(this.form, (this.loading = true));
-    let request = this.form.getRawValue();
-    request.roles = request.roles.split(",");
+    const request = this.form.getRawValue();
     let http: Observable<User>;
     if (this.existing) {
       http = this.service.patch(this.existing.id, request);

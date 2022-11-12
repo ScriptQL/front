@@ -14,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class EditDataSourceModal {
 
+  drivers: string[] = ["POSTGRES", "MYSQL"];
   existing: DataSource;
   form: FormGroup;
   loading: boolean = false;
@@ -31,6 +32,9 @@ export class EditDataSourceModal {
         Validators.required
       ]],
       host: [data?.host, [
+        Validators.required
+      ]],
+      driver: [data?.driver, [
         Validators.required
       ]],
       port: [data?.port, [

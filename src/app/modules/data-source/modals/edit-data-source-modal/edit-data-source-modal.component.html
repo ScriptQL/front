@@ -8,6 +8,12 @@
       <input type="text" matInput formControlName="name">
     </mat-form-field>
     <mat-form-field appearance="fill">
+      <mat-label>Driver</mat-label>
+      <mat-select formControlName="driver">
+        <mat-option *ngFor="let driver of drivers" [value]="driver">{{ driver }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Host</mat-label>
       <input type="text" matInput formControlName="host">
     </mat-form-field>

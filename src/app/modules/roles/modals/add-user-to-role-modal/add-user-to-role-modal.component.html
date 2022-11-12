@@ -1,0 +1,8 @@
+<h1 mat-dialog-title align="center">Adicionar Usuário ao Grupo de Acesso</h1>
+<div mat-dialog-content>
+  <shared-user-select (onUpdated)="onUpdated($event)"></shared-user-select>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onOk()">Ok</button>
+</div>

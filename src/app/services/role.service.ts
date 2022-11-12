@@ -1,3 +1,4 @@
+import { User } from './../interfaces/user';
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -16,7 +17,9 @@ const routes = {
   create: () =>
     `${environment.api_url}/roles`,
   delete: (id: string) => 
-    `${environment.api_url}/roles/${id}` 
+    `${environment.api_url}/roles/${id}`,
+  findUsersByRoleId: (id: string, page: number, filter: string) =>
+    `${environment.api_url}/roles/${id}/users?page=${page}${filter}`
 };
 
 @Injectable({
@@ -48,6 +51,11 @@ export class RoleService {
 
   public delete(id: string): Observable<void> {
     return this.http.delete<void>(routes.delete(id));
+  }
+
+  public findUsersByRoleId(id: string, page: number, filter?: any): Observable<Page<User>> {
+    const data = this.filters.toURL(filter);
+    return this.http.get<Page<User>>(routes.findUsersByRoleId(id, page, data));
   }
 
 }

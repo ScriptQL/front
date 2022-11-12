@@ -1,17 +1,18 @@
-<div class="section">
+<div class="section" *ngIf="data$ | async as data">
   <div class="header">
     <div class="title">
-      Usuarios
+      Grupo de acesso: {{ data.name }}
     </div>
     <div class="extra">
-      <button mat-icon-button (click)="onAdd()">
-        <mat-icon fontIcon="add"></mat-icon>
+      <button mat-raised-button aria-label="Add role to user" (click)="onAddUser()">
+        <mat-icon>add</mat-icon>
+        Adicionar usuário ao grupo de acesso
       </button>
     </div>
   </div>
   <div class="content">
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="data.items">
+      <table mat-table [dataSource]="page.items">
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -23,29 +24,25 @@
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let element">{{ element.email }}</td>
         </ng-container>
-
+    
         <!-- Edit Column -->
         <ng-container matColumnDef="more">
           <th mat-header-cell *matHeaderCellDef>
             <mat-icon aria-hidden="false" aria-label="More" fontIcon="more_horiz"></mat-icon>
           </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button (click)="editUser(element.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
+            <div class="buttons">
+              <button mat-icon-button (click)="onDeleteUser(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
-
+    
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns;"></tr>
       </table>
-      <mat-paginator [pageSize]="data.limit"
-                     [pageIndex]="data.page - 1"
-                     (page)="onPage($event)"
-                     [length]="data.total"
-                     showFirstLastButtons
-                     aria-label="Update list page">
-      </mat-paginator>
     </div>
+    
   </div>
 </div>

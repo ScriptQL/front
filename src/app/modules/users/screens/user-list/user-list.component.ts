@@ -13,7 +13,7 @@ import {User} from "../../../../interfaces/user";
 })
 export class UserListComponent implements OnInit {
 
-  columns: string[] = ['name', 'email', 'access', 'more'];
+  columns: string[] = ['name', 'email', 'more'];
   data: Page<User> = new Page<User>();
 
   constructor(

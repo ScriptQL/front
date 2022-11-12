@@ -7,5 +7,5 @@ export interface User {
   password: string,
   access: "USER" | "EXECUTOR" | "ADMIN",
   status: string,
-  roles: Array<Role> | Array<Number>
+  roles: Array<Role>
 }

@@ -13,7 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./edit-user-modal.component.scss']
 })
 export class EditUserModal {
-
+  status: string[] = ["Ativo", "Inativo"];
   existing: User;
   form: FormGroup;
   loading: boolean = false;
@@ -34,6 +34,9 @@ export class EditUserModal {
         Validators.required
       ]],
       password: [data?.password, [
+        Validators.required
+      ]],
+      status: [data?.status, [
         Validators.required
       ]]
     });

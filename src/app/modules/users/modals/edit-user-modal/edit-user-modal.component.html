@@ -18,11 +18,10 @@
       <input type="password" matInput formControlName="password">
     </mat-form-field>
 
-    <mat-form-field *ngIf="existing" appearance="fill">
+    <mat-form-field appearance="fill">
       <mat-label>Situação</mat-label>
-      <mat-select>
-        <mat-option [value]="true">Ativo</mat-option>
-        <mat-option [value]="true">Inativo</mat-option>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of status" [value]="status">{{ status }}</mat-option>
       </mat-select>
     </mat-form-field>
   </form>

@@ -14,7 +14,9 @@ const routes = {
   patch: (id: string) =>
     `${environment.api_url}/users/${id}`,
   create: () =>
-    `${environment.api_url}/users`
+    `${environment.api_url}/users`,
+  editPassword: () =>  
+    `${environment.api_url}/users/newPassword`
 };
 
 @Injectable({
@@ -38,6 +40,10 @@ export class UserService {
 
   public patch(id: string, body: any): Observable<User> {
     return this.http.patch<User>(routes.patch(id), body);
+  }
+  
+  public newPassword(id: string, body: any): Observable<User> {
+    return this.http.patch<User>(routes.editPassword(), body);
   }
 
   public create(body: any): Observable<User> {

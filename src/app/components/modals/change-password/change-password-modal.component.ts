@@ -59,21 +59,21 @@ export class ChangePasswordModal implements OnInit {
     }
     this.fb.setLoading(this.form, (this.loading = true));
     const request = this.form.getRawValue();
-    // let http: Observable<User>;
-    // http = this.service.create(request);
-    // http.subscribe({
-    //   next: (data) => {
-    //     this.dialogRef.close(data);
-    //   },
-    //   error: (error) => {
-    //     this._snackBar.open(error.error?.message, '', {
-    //       duration: 5000,
-    //       horizontalPosition: 'center',
-    //       verticalPosition: 'bottom'
-    //     });
-    //     this.fb.setLoading(this.form, (this.loading = false));
-    //   }
-    // });
+     let http: Observable<User>;
+     http = this.service.newPassword(this.currentUser.id, request);
+     http.subscribe({
+       next: (data) => {
+         this.dialogRef.close(data);
+       },
+       error: (error) => {
+         this._snackBar.open(error.error?.message, '', {
+           duration: 5000,
+           horizontalPosition: 'center',
+           verticalPosition: 'bottom'
+         });
+         this.fb.setLoading(this.form, (this.loading = false));
+       }
+     });
   }
 
 }

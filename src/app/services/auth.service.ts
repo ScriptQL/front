@@ -15,7 +15,8 @@ const httpOptions = {
 const routes = {
   login: `${environment.api_url}/login`,
   register: `${environment.api_url}/register`,
-  self_user: `${environment.api_url}/users/@me`
+  self_user: `${environment.api_url}/users/@me`,
+  change_password: `${environment.api_url}/users/change_password`
 }
 
 @Injectable({
@@ -40,6 +41,22 @@ export class AuthService extends StateService<User> {
    */
   private setToken(token: any): void {
     this.setCookie('Session', token.code, 1);
+  }
+
+  /*
+    Change password
+
+  */
+  private newPassword() {
+    this.getUser();
+  }
+
+  /*
+    Register new user
+  
+  */
+  private newUser() {
+    
   }
 
   /**

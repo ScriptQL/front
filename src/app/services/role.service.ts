@@ -1,3 +1,4 @@
+import { UserRole } from './../interfaces/user-role';
 import { User } from './../interfaces/user';
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
@@ -19,7 +20,11 @@ const routes = {
   delete: (id: string) => 
     `${environment.api_url}/roles/${id}`,
   findUsersByRoleId: (id: string, page: number, filter: string) =>
-    `${environment.api_url}/roles/${id}/users?page=${page}${filter}`
+    `${environment.api_url}/roles/${id}/users?page=${page}${filter}`,
+  createUserRole: (roleId: string) => 
+    `${environment.api_url}/roles/${roleId}/users`,
+  deleteUserRoleByRoleIdAndUserId: (roleId: string, userId: string) => 
+    `${environment.api_url}/roles/${roleId}/users/${userId}`
 };
 
 @Injectable({
@@ -58,4 +63,11 @@ export class RoleService {
     return this.http.get<Page<User>>(routes.findUsersByRoleId(id, page, data));
   }
 
+  public createUserRole(roleId: string, user: User): Observable<UserRole> {
+    return this.http.post<UserRole>(routes.createUserRole(roleId), user);
+  }
+
+  public deleteUserRoleByRoleIdAndUserId(roleId: string, userId: string): Observable<void> {
+    return this.http.delete<void>(routes.deleteUserRoleByRoleIdAndUserId(roleId, userId));
+  }
 }

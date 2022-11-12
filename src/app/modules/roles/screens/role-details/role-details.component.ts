@@ -1,6 +1,7 @@
+import { ConfirmModal } from './../../../query/modals/confirm-modal/confirm-modal.component';
+import { AddUserToRoleModal } from './../../modals/add-user-to-role-modal/add-user-to-role-modal.component';
 import { Page } from './../../../../interfaces/page';
 import { User } from './../../../../interfaces/user';
-import { UserService } from './../../../../services/user.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import {mergeMap, Observable, tap} from "rxjs";
@@ -8,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleService } from './../../../../services/role.service';
 import { Role } from './../../../../interfaces/role';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-role-details',
@@ -22,19 +23,23 @@ export class RoleDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: RoleService,
-    private queries: UserService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.data$ = this.route.paramMap.pipe(mergeMap(url => {
       const id = url.get('id');
-      return this.service.findById(id).pipe(tap(role => this.onPage(role)));
+      return this.service.findById(id).pipe(tap(role => {
+        this.role = role;
+        this.onPage(role)
+      }));
     }));
   }
 
   columns: string[] = ['name', 'email', 'more'];
   page: Page<User> = new Page<User>();
+  role: Role;
 
   onPage(role: Role, $event?: PageEvent): void {
     let index;
@@ -54,10 +59,48 @@ export class RoleDetailsComponent implements OnInit {
   }
 
   onAddUser(): void {
-    // @TODO: IMPLEMENT THIS
+    this.dialog.open(AddUserToRoleModal, {
+      width: '420px'
+    }).afterClosed().pipe(mergeMap(data => {
+      if (!data) {
+        return data;
+      }
+
+      return this.service.createUserRole(this.role.id, data);
+    })).subscribe({
+      next: () => this.ngOnInit(),
+      error: (err) => {
+        this._snackBar.open(err.error?.message, '', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      }
+    });
   }
 
-  onDeleteUser(user: User): void {
-    // @TODO: IMPLEMENT THIS
+  onDeleteUserRole(user: User): void {
+    this.dialog.open(ConfirmModal, {
+      data: {
+        title: 'Tem certeza?',
+        content: 'Deseja excluir esse usuário do grupo de acesso?'
+      },
+      width: '420px'
+    }).afterClosed().pipe(mergeMap(shouldDelete => {
+      if (shouldDelete) {
+        return this.service.deleteUserRoleByRoleIdAndUserId(this.role.id, user.id);
+      }
+
+      return shouldDelete;
+    })).subscribe({
+      next: () => this.ngOnInit(),
+      error: (err) => {
+        this._snackBar.open(err.error?.message, '', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      }
+    })
   }
 }

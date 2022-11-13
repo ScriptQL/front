@@ -13,7 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./edit-user-modal.component.scss']
 })
 export class EditUserModal {
-  status: string[] = ["Ativo", "Inativo"];
+  userStatus: string[] = ["Ativo", "Inativo"];
   existing: User;
   form: FormGroup;
   loading: boolean = false;

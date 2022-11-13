@@ -14,7 +14,7 @@ const routes = {
   patch: (id: string) =>
     `${environment.api_url}/users/${id}`,
   create: () =>
-    `${environment.api_url}/users`,
+    `${environment.api_url}/register`,
   editPassword: () =>  
     `${environment.api_url}/users/newPassword`
 };

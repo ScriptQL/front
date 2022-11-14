@@ -5,6 +5,8 @@ import {PageEvent} from "@angular/material/paginator";
 import { EditUserModal } from './../../modals/edit-user-modal/edit-user-modal.component';
 import {UserService} from "../../../../services/user.service";
 import {User} from "../../../../interfaces/user";
+import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -13,16 +15,28 @@ import {User} from "../../../../interfaces/user";
 })
 export class UserListComponent implements OnInit {
 
+
   columns: string[] = ['name', 'email', 'more'];
   data: Page<User> = new Page<User>();
+  currentUser$: Observable<User>;
 
   constructor(
     private service: UserService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private authService: AuthService,) {
   }
 
   ngOnInit(): void {
     this.onPage();
+    this.currentUser$ = this.authService.getUser();  
+  }
+
+  onAdminAcess(user: User): boolean {
+    return user.access === 'ADMIN';
+  }
+
+  onSameUser(user: User, id: string): boolean{
+    return user.id === id;
   }
 
   onPage($event?: PageEvent): void {

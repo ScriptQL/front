@@ -65,7 +65,6 @@ export class AuthService extends StateService<User> {
    * @param body Login details.
    */
   public login(body: { email: string, password: string }): Observable<any> {
-    this.deleteSession();
     return this.http.post<any>(routes.login, body, httpOptions).pipe(tap(data => this.setToken(data)));
   }
 

@@ -15,10 +15,9 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent implements OnInit {
 
-
   columns: string[] = ['name', 'email', 'more'];
   data: Page<User> = new Page<User>();
-  currentUser$: Observable<User>;
+  currentUser: User;
 
   constructor(
     private service: UserService,
@@ -28,15 +27,20 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.onPage();
-    this.currentUser$ = this.authService.getUser();  
+    this.authService.getUser().subscribe({
+      next: user => {
+        this.currentUser = user;
+      },
+      error: err => console.error(err)
+    });
   }
 
-  onAdminAcess(user: User): boolean {
-    return user.access === 'ADMIN';
+  onAdminAcess(): boolean {
+    return this.currentUser.access === 'ADMIN';
   }
 
-  onSameUser(user: User, id: string): boolean{
-    return user.id === id;
+  onSameUser(id: string): boolean{
+    return this.currentUser.id === id;
   }
 
   onPage($event?: PageEvent): void {

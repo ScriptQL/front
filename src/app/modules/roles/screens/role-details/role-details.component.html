@@ -1,12 +1,12 @@
 <div class="section" *ngIf="data$ | async as data">
   <div class="header">
     <div class="title">
-      Grupo de acesso: {{ data.name }}
+      Grupo de revisão: {{ data.name }}
     </div>
     <div class="extra">
       <button mat-raised-button aria-label="Add role to user" (click)="onAddUser()">
         <mat-icon>add</mat-icon>
-        Adicionar usuário ao grupo de acesso
+        Adicionar usuário ao grupo
       </button>
     </div>
   </div>

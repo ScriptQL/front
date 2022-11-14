@@ -36,7 +36,7 @@ export class EditUserModal {
       password: [data?.password, [
         Validators.required
       ]],
-      status: [data?.status, [
+      status: [data?.status ?? 'Ativo', [
         Validators.required
       ]]
     });

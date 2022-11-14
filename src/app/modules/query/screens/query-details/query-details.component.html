@@ -5,32 +5,32 @@
       <div class="extra">
         <span *ngIf="query.status === 'WAITING_REVIEW'">
               <mat-icon aria-hidden="false" fontIcon="how_to_reg"
-                        matTooltip="Awaiting approval"
-                        aria-label="Awaiting approval"
+                        matTooltip="Aguardando aprovação"
+                        aria-label="Aguardando aprovação"
               ></mat-icon>
             </span>
         <span *ngIf="query.status === 'APPROVED'">
               <mat-icon aria-hidden="false" fontIcon="hourglass_empty"
-                        matTooltip="Awaiting execution"
-                        aria-label="Awaiting execution"
+                        matTooltip="Aguardando execução"
+                        aria-label="Aguardando execução"
               ></mat-icon>
             </span>
         <span *ngIf="query.status === 'REJECTED'">
               <mat-icon aria-hidden="false" fontIcon="close"
-                        matTooltip="Rejected"
-                        aria-label="Rejected"
+                        matTooltip="Rejeitada"
+                        aria-label="Rejeitada"
               ></mat-icon>
             </span>
         <span *ngIf="query.status === 'EXECUTING'">
               <mat-icon aria-hidden="false" fontIcon="cycle"
-                        matTooltip="Executing"
-                        aria-label="Executing"
+                        matTooltip="Executando"
+                        aria-label="Executando"
               ></mat-icon>
             </span>
         <span *ngIf="query.status === 'DONE'">
               <mat-icon aria-hidden="false" fontIcon="check"
-                        matTooltip="Executed successfully"
-                        aria-label="Executed successfully"
+                        matTooltip="Executada com sucesso"
+                        aria-label="Executada com sucesso"
               ></mat-icon>
             </span>
       </div>

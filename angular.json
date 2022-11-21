@@ -30,8 +30,21 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.scss"
+              {
+                "input": "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                "inject": true,
+                "bundleName": "theme"
+              },
+              {
+                "input": "./node_modules/eva-icons/style/scss/eva-icons.scss",
+                "inject": true,
+                "bundleName": "eva-icons"
+              },
+              {
+                "input": "src/styles.scss",
+                "inject": true,
+                "bundleName": "global"
+              }
             ],
             "scripts": [
               "node_modules/marked/marked.min.js"

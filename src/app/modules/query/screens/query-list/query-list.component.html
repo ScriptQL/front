@@ -12,95 +12,83 @@
   </div>
   <div class="content">
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="data.items">
+      <table [dataSource]="data.items" mat-table>
         <!-- Status Column -->
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>
+          <th *matHeaderCellDef mat-header-cell>
             <mat-icon aria-hidden="false" aria-label="Status" fontIcon="more_horiz"></mat-icon>
           </th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="element.status === 'WAITING_REVIEW'">
-              <mat-icon aria-hidden="false" fontIcon="how_to_reg"
-                        matTooltip="Aguardando aprovação"
-                        aria-label="Aguardando aprovação"
-              ></mat-icon>
+          <td *matCellDef="let element" mat-cell>
+            <span *ngIf="element.status === 'WAITING_REVIEW'" matTooltip="Aguardando aprovação">
+              <i class="eva eva-2x eva-person-done-outline"></i>
             </span>
-            <span *ngIf="element.status === 'APPROVED'">
-              <mat-icon aria-hidden="false" fontIcon="hourglass_empty"
-                        matTooltip="Aguardando execução"
-                        aria-label="Aguardando execução"
-              ></mat-icon>
+            <span *ngIf="element.status === 'APPROVED'" matTooltip="Aguardando execução">
+              <i class="eva eva-2x eva-clock-outline"></i>
             </span>
-            <span *ngIf="element.status === 'REJECTED'">
-              <mat-icon aria-hidden="false" fontIcon="close"
-                        matTooltip="Rejeitada"
-                        aria-label="Rejeitada"
-              ></mat-icon>
+            <span *ngIf="element.status === 'REJECTED'" matTooltip="Rejeitada">
+              <i class="eva eva-2x eva-person-delete-outline"></i>
             </span>
-            <span *ngIf="element.status === 'EXECUTING'">
-              <mat-icon aria-hidden="false" fontIcon="cycle"
-                        matTooltip="Executando"
-                        aria-label="Executando"
-              ></mat-icon>
+            <span *ngIf="element.status === 'EXECUTING'" matTooltip="Executando">
+              <i class="eva eva-2x eva-repeat-outline"></i>
             </span>
-            <span *ngIf="element.status === 'DONE'">
-              <mat-icon aria-hidden="false" fontIcon="check"
-                        matTooltip="Executada com sucesso"
-                        aria-label="Executada com sucesso"
-              ></mat-icon>
+            <span *ngIf="element.status === 'DONE'" matTooltip="Executada com sucesso">
+              <i class="eva eva-2x eva-checkmark-outline"></i>
+            </span>
+            <span *ngIf="element.status === 'ERROR'" matTooltip="Falha na execução">
+              <i class="eva eva-2x eva-close-outline"></i>
             </span>
           </td>
         </ng-container>
 
         <!-- Requester Column -->
         <ng-container matColumnDef="requester">
-          <th mat-header-cell *matHeaderCellDef>Solicitante</th>
-          <td mat-cell *matCellDef="let element">
+          <th *matHeaderCellDef mat-header-cell>Solicitante</th>
+          <td *matCellDef="let element" mat-cell>
             <shared-user-details [user]="element.requester"></shared-user-details>
           </td>
         </ng-container>
 
         <!-- Title Column -->
         <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef>Titulo</th>
-          <td mat-cell *matCellDef="let element">{{element.title | truncate:[20]}}</td>
+          <th *matHeaderCellDef mat-header-cell>Titulo</th>
+          <td *matCellDef="let element" mat-cell>{{element.title | truncate:[20]}}</td>
         </ng-container>
 
         <!-- Description Column -->
         <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef>Descrição</th>
-          <td mat-cell *matCellDef="let element">{{element.description | truncate:[65]}}</td>
+          <th *matHeaderCellDef mat-header-cell>Descrição</th>
+          <td *matCellDef="let element" mat-cell>{{element.description | truncate:[65]}}</td>
         </ng-container>
 
         <!-- Connection Column -->
         <ng-container matColumnDef="connection">
-          <th mat-header-cell *matHeaderCellDef>Conexão</th>
-          <td mat-cell *matCellDef="let element">
+          <th *matHeaderCellDef mat-header-cell>Conexão</th>
+          <td *matCellDef="let element" mat-cell>
             <a href="/connections/{{ element.connection?.id }}">{{ element.connection?.name }}</a>
           </td>
         </ng-container>
 
         <!-- Edit Column -->
         <ng-container matColumnDef="more">
-          <th mat-header-cell *matHeaderCellDef>
+          <th *matHeaderCellDef mat-header-cell>
             <mat-icon aria-hidden="false" aria-label="More" fontIcon="more_horiz"></mat-icon>
           </th>
-          <td mat-cell *matCellDef="let element">
+          <td *matCellDef="let element" mat-cell>
             <button mat-icon-button routerLink="/queries/{{ element.id }}">
               <mat-icon>open_in_new</mat-icon>
             </button>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        <tr *matHeaderRowDef="columns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: columns;" mat-row></tr>
       </table>
-      <mat-paginator [pageSize]="data.limit"
-                     [pageIndex]="data.page - 1"
-                     (page)="onPage($event)"
+      <mat-paginator (page)="onPage($event)"
                      [length]="data.total"
-                     showFirstLastButtons
-                     aria-label="Update list page">
+                     [pageIndex]="data.page - 1"
+                     [pageSize]="data.limit"
+                     aria-label="Update list page"
+                     showFirstLastButtons>
       </mat-paginator>
     </div>
   </div>

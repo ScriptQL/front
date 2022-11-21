@@ -11,6 +11,7 @@ export interface Query {
   query: string,
   title: string,
   description: string,
-  status: "WAITING_REVIEW" | "APPROVED" | "REJECTED" | "EXECUTING" | "DONE"
+  error: string,
+  status: "WAITING_REVIEW" | "APPROVED" | "REJECTED" | "EXECUTING" | "DONE" | "ERROR"
 
 }

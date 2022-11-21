@@ -15,7 +15,8 @@ import {QueryDetailsComponent} from './screens/query-details/query-details.compo
 import {QueryCreateComponent} from './screens/query-create/query-create.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {AddReviewerRoleModal} from './modals/add-reviewer-role-modal/add-reviewer-role-modal.component';
-import { ConfirmModal } from './modals/confirm-modal/confirm-modal.component';
+import {ConfirmModal} from './modals/confirm-modal/confirm-modal.component';
+import {QueryResultComponent} from './panels/query-result/query-result.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ConfirmModal } from './modals/confirm-modal/confirm-modal.component';
     QueryDetailsComponent,
     QueryCreateComponent,
     AddReviewerRoleModal,
-    ConfirmModal
+    ConfirmModal,
+    QueryResultComponent
   ],
   imports: [
     SharedModule,

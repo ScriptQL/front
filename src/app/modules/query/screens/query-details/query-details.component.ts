@@ -9,6 +9,8 @@ import {ReviewService} from "../../../../services/review.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmModal} from "../../modals/confirm-modal/confirm-modal.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HttpDownloadProgressEvent, HttpEventType} from "@angular/common/http";
+import {Download} from "../../../../interfaces/download";
 
 @Component({
   selector: 'app-query-details',
@@ -39,7 +41,7 @@ export class QueryDetailsComponent implements OnInit {
     }));
   }
 
-  onExecute(): void {
+  onExecute(query: Query): void {
     this.dialog.open(ConfirmModal, {
       data: {
         title: 'Tem certeza?',
@@ -50,12 +52,52 @@ export class QueryDetailsComponent implements OnInit {
       if (!data) {
         return;
       }
-      // execute
+      this.service.execute(query).subscribe({
+        next: () => {
+          query.status = "EXECUTING";
+        },
+        error: (error) => {
+          this._snackBar.open(error.error?.message, '', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
+        }
+      });
     });
   }
 
-  onDownload(): void {
-
+  onDownload(query: Query): void {
+    this.service.download(query).subscribe({
+      next: (data) => {
+        if (data.type === HttpEventType.DownloadProgress) {
+          let event = (data as HttpDownloadProgressEvent);
+          console.log(`Downloading: ${event.loaded} / ${event.total}`);
+        } else if (data.type === HttpEventType.Response) {
+          let download = data as Download;
+          if (!download.content || download.content.type === 'null') {
+            this._snackBar.open('This query does not have a result', '', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom'
+            });
+            return;
+          }
+          const url = window.URL.createObjectURL(download.content);
+          let downloadLink = document.createElement('a');
+          downloadLink.href = url;
+          downloadLink.setAttribute('download', download.name);
+          downloadLink.click();
+        }
+      },
+      error: (error) => {
+        this._snackBar.open(error.error?.message, '', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      }
+    });
   }
 
   onReview(query: Query, approved: boolean): void {

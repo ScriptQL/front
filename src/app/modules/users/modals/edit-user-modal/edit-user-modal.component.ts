@@ -5,7 +5,7 @@ import {FormService} from "../../../../services/form.service";
 import {User} from "../../../../interfaces/user";
 import {UserService} from "../../../../services/user.service";
 import {Observable} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-user-modal',
@@ -21,7 +21,7 @@ export class EditUserModal {
   constructor(
     private fb: FormService,
     private service: UserService,
-    private _snackBar: MatSnackBar,
+    private _msg: MessagingService,
     public dialogRef: MatDialogRef<EditUserModal>,
     @Inject(MAT_DIALOG_DATA) public data: User
   ) {
@@ -63,11 +63,7 @@ export class EditUserModal {
         this.dialogRef.close(data);
       },
       error: (error) => {
-        this._snackBar.open(error.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(error.error?.message);
         this.fb.setLoading(this.form, (this.loading = false));
       }
     });

@@ -59,7 +59,6 @@ import { UserSelectComponent } from './components/user-select/user-select.compon
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    MatIconModule,
     HttpClientModule,
     MatTableModule,
     MatTooltipModule,

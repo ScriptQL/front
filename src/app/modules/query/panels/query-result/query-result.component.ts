@@ -21,7 +21,8 @@ export class QueryResultComponent implements OnInit {
   ngOnInit(): void {
     this.service.head(this.query).subscribe({
       next: (data) => {
-        this.length = data.get('Content-Length');
+        let length = data.get('Content-Length');
+        this.length = length ? length : '0';
       }
     });
 

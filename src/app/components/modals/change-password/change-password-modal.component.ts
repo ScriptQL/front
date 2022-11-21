@@ -1,12 +1,12 @@
-import { User } from './../../../interfaces/user';
-import { Component, Inject, OnInit } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {User} from '../../../interfaces/user';
+import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 import {FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import { FormService } from './../../../services/form.service';
-import { UserService } from './../../../services/user.service';
-import { AuthService } from './../../../services/auth.service';
+import {FormService} from '../../../services/form.service';
+import {UserService} from '../../../services/user.service';
+import {AuthService} from '../../../services/auth.service';
+import {MessagingService} from "../../../services/messaging.service";
 
 @Component({
   selector: 'change-password-modal',
@@ -23,7 +23,7 @@ export class ChangePasswordModal implements OnInit {
     private fb: FormService,
     private service: UserService,
     private authService: AuthService,
-    private _snackBar: MatSnackBar,
+    private _msg: MessagingService,
     public dialogRef: MatDialogRef<ChangePasswordModal>
   ) {
     this.form = this.fb.group({
@@ -59,21 +59,17 @@ export class ChangePasswordModal implements OnInit {
     }
     this.fb.setLoading(this.form, (this.loading = true));
     const request = this.form.getRawValue();
-     let http: Observable<User>;
-     http = this.service.newPassword(this.currentUser.id, request);
-     http.subscribe({
-       next: (data) => {
-         this.dialogRef.close(data);
-       },
-       error: (error) => {
-         this._snackBar.open(error.error?.message, '', {
-           duration: 5000,
-           horizontalPosition: 'center',
-           verticalPosition: 'bottom'
-         });
-         this.fb.setLoading(this.form, (this.loading = false));
-       }
-     });
+    let http: Observable<User>;
+    http = this.service.newPassword(this.currentUser.id, request);
+    http.subscribe({
+      next: (data) => {
+        this.dialogRef.close(data);
+      },
+      error: (error) => {
+        this._msg.error(error.error?.message);
+        this.fb.setLoading(this.form, (this.loading = false));
+      }
+    });
   }
 
 }

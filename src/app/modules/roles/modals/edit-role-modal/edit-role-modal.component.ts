@@ -5,7 +5,7 @@ import {FormService} from "../../../../services/form.service";
 import {Role} from "../../../../interfaces/role";
 import {RoleService} from "../../../../services/role.service";
 import {Observable} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-role-modal',
@@ -21,7 +21,7 @@ export class EditRoleModal {
   constructor(
     private fb: FormService,
     private service: RoleService,
-    private _snackBar: MatSnackBar,
+    private _msg: MessagingService,
     public dialogRef: MatDialogRef<EditRoleModal>,
     @Inject(MAT_DIALOG_DATA) public data: Role
   ) {
@@ -54,11 +54,7 @@ export class EditRoleModal {
         this.dialogRef.close(data);
       },
       error: (error) => {
-        this._snackBar.open(error.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(error.error?.message);
         this.fb.setLoading(this.form, (this.loading = false));
       }
     });

@@ -1,4 +1,4 @@
-<mat-form-field class="select">
+<mat-form-field class="select" appearance="fill">
   <mat-label>Escolha</mat-label>
   <mat-select *ngIf="connections$ | async as page" [(value)]="selected" (valueChange)="onUpdate($event)">
     <mat-option *ngFor="let role of page.items" [value]="role">

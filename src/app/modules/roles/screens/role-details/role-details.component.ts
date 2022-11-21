@@ -1,15 +1,15 @@
-import { ConfirmModal } from './../../../query/modals/confirm-modal/confirm-modal.component';
-import { AddUserToRoleModal } from './../../modals/add-user-to-role-modal/add-user-to-role-modal.component';
-import { Page } from './../../../../interfaces/page';
-import { User } from './../../../../interfaces/user';
-import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
+import {ConfirmModal} from './../../../query/modals/confirm-modal/confirm-modal.component';
+import {AddUserToRoleModal} from './../../modals/add-user-to-role-modal/add-user-to-role-modal.component';
+import {Page} from './../../../../interfaces/page';
+import {User} from './../../../../interfaces/user';
+import {PageEvent} from '@angular/material/paginator';
+import {ActivatedRoute} from '@angular/router';
 import {mergeMap, Observable, tap} from "rxjs";
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { RoleService } from './../../../../services/role.service';
-import { Role } from './../../../../interfaces/role';
-import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {RoleService} from './../../../../services/role.service';
+import {Role} from './../../../../interfaces/role';
+import {Component, OnInit} from '@angular/core';
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-role-details',
@@ -24,7 +24,7 @@ export class RoleDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private service: RoleService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar) {
+    private _msg: MessagingService) {
   }
 
   ngOnInit(): void {
@@ -70,11 +70,7 @@ export class RoleDetailsComponent implements OnInit {
     })).subscribe({
       next: () => this.ngOnInit(),
       error: (err) => {
-        this._snackBar.open(err.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(err.error?.message);
       }
     });
   }
@@ -95,11 +91,7 @@ export class RoleDetailsComponent implements OnInit {
     })).subscribe({
       next: () => this.ngOnInit(),
       error: (err) => {
-        this._snackBar.open(err.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(err.error?.message);
       }
     })
   }

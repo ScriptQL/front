@@ -11,12 +11,12 @@
     </div>
   </div>
   <div class="content">
-    <div class="mat-elevation-z8">
+    <div>
       <table [dataSource]="data.items" mat-table>
         <!-- Status Column -->
         <ng-container matColumnDef="status">
           <th *matHeaderCellDef mat-header-cell>
-            <mat-icon aria-hidden="false" aria-label="Status" fontIcon="more_horiz"></mat-icon>
+            <i class="eva eva-2x eva-more-horizontal"></i>
           </th>
           <td *matCellDef="let element" mat-cell>
             <span *ngIf="element.status === 'WAITING_REVIEW'" matTooltip="Aguardando aprovação">

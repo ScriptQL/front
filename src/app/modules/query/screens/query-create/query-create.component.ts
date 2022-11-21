@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../../../../services/form.service";
 import {Role} from "../../../../interfaces/role";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {QueryService} from "../../../../services/query.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {AddReviewerRoleModal} from "../../modals/add-reviewer-role-modal/add-reviewer-role-modal.component";
 import {DataSource} from "../../../../interfaces/data-source";
 import {DataSourceService} from "../../../../services/data-source.service";
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-query-create',
@@ -23,11 +23,11 @@ export class QueryCreateComponent implements OnInit {
 
   constructor(
     private forms: FormService,
-    private _snackBar: MatSnackBar,
     private service: QueryService,
     private router: Router,
     private dialog: MatDialog,
     private connections: DataSourceService,
+    private _msg: MessagingService
   ) {
     this.form = this.forms.group({
       title: ['', [
@@ -65,9 +65,12 @@ export class QueryCreateComponent implements OnInit {
 
   onSave(): void {
     if (!this.forms.check(this.form)) {
+      if (this.form.controls['connection'].invalid) {
+        this._msg.error('Banco de dados não selecionado');
+      }
       return;
     } else if (this.reviewers.length == 0) {
-      this.showError('Nenhum reviewer adicionado');
+      this._msg.error('Nenhum reviewer adicionado');
       return;
     }
     this.forms.setLoading(this.form, (this.loading = true));
@@ -79,17 +82,9 @@ export class QueryCreateComponent implements OnInit {
         this.router.navigate(['/queries', data.id]).finally();
       },
       error: (error) => {
-        this.showError(error.error?.message);
+        this._msg.error(error.error?.message);
         this.forms.setLoading(this.form, (this.loading = false));
       }
-    });
-  }
-
-  showError(message: string): void {
-    this._snackBar.open(message, undefined, {
-      duration: 5000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
     });
   }
 
@@ -102,7 +97,7 @@ export class QueryCreateComponent implements OnInit {
         data.forEach(role => this.reviewers.push(role));
       },
       error: (error) => {
-        this.showError(error.error?.message);
+        this._msg.error(error.error?.message);
       }
     });
   }

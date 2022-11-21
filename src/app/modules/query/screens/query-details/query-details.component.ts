@@ -8,9 +8,9 @@ import {Review} from "../../../../interfaces/review";
 import {ReviewService} from "../../../../services/review.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmModal} from "../../modals/confirm-modal/confirm-modal.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpDownloadProgressEvent, HttpEventType} from "@angular/common/http";
 import {Download} from "../../../../interfaces/download";
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-query-details',
@@ -27,7 +27,7 @@ export class QueryDetailsComponent implements OnInit {
     private service: QueryService,
     private reviews: ReviewService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar) {
+    private _msg: MessagingService) {
   }
 
   ngOnInit(): void {
@@ -57,11 +57,7 @@ export class QueryDetailsComponent implements OnInit {
           query.status = "EXECUTING";
         },
         error: (error) => {
-          this._snackBar.open(error.error?.message, '', {
-            duration: 5000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
-          });
+          this._msg.error(error.error?.message);
         }
       });
     });
@@ -76,11 +72,7 @@ export class QueryDetailsComponent implements OnInit {
         } else if (data.type === HttpEventType.Response) {
           let download = data as Download;
           if (!download.content || download.content.type === 'null') {
-            this._snackBar.open('This query does not have a result', '', {
-              duration: 5000,
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom'
-            });
+            this._msg.error('Esta query não possui um arquivo');
             return;
           }
           const url = window.URL.createObjectURL(download.content);
@@ -91,11 +83,7 @@ export class QueryDetailsComponent implements OnInit {
         }
       },
       error: (error) => {
-        this._snackBar.open(error.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(error.error?.message);
       }
     });
   }
@@ -120,11 +108,7 @@ export class QueryDetailsComponent implements OnInit {
           location.reload();
         },
         error: (error) => {
-          this._snackBar.open(error.error?.message, '', {
-            duration: 5000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
-          });
+          this._msg.error(error.error?.message);
         }
       });
     });

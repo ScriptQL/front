@@ -24,6 +24,7 @@ export class FormService {
             valid = result;
           }
         } else {
+          item.markAllAsTouched();
           item.markAsDirty();
           item.updateValueAndValidity();
           if (item.invalid) {

@@ -5,7 +5,7 @@ import {mergeMap, Observable} from "rxjs";
 import {Role} from "../../../../interfaces/role";
 import {AddReviewerRoleModal} from "../../../query/modals/add-reviewer-role-modal/add-reviewer-role-modal.component";
 import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessagingService} from "../../../../services/messaging.service";
 
 @Component({
   selector: 'app-data-source-reviewers',
@@ -23,7 +23,7 @@ export class DataSourceReviewersComponent implements OnInit {
   constructor(
     private service: DataSourceService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar) {
+    private _msg: MessagingService) {
   }
 
   ngOnInit(): void {
@@ -44,11 +44,7 @@ export class DataSourceReviewersComponent implements OnInit {
         this.ngOnInit();
       },
       error: (error) => {
-        this._snackBar.open(error.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(error.error?.message);
       }
     });
   }
@@ -59,11 +55,7 @@ export class DataSourceReviewersComponent implements OnInit {
         this.ngOnInit();
       },
       error: (error) => {
-        this._snackBar.open(error.error?.message, '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this._msg.error(error.error?.message);
       }
     });
   }

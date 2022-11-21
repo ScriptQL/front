@@ -4,7 +4,7 @@ table {
 
 .mat-column-status {
   width: 32px;
-  padding: 16px;
+  padding: 8px 24px 8px 0;
 }
 
 .mat-column-requester {
@@ -16,4 +16,8 @@ table {
 .mat-column-more {
   width: 32px;
   text-align: center;
+}
+
+.eva-2x {
+  font-size: 1.5em;
 }

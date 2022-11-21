@@ -18,16 +18,19 @@
               <mat-form-field appearance="standard">
                 <mat-label>Titulo</mat-label>
                 <input type="text" matInput formControlName="title" [maxLength]="250">
+                <mat-error>Este campo é obrigatorio</mat-error>
               </mat-form-field>
               <mat-form-field appearance="standard">
                 <mat-label>Descrição</mat-label>
                 <textarea matInput #description formControlName="description" [maxLength]="4000"></textarea>
                 <mat-hint align="end">{{description.value?.length || 0}}/{{description.maxLength}}</mat-hint>
+                <mat-error>Este campo é obrigatorio</mat-error>
               </mat-form-field>
               <mat-form-field appearance="standard">
                 <mat-label>SQL</mat-label>
                 <textarea matInput #sql formControlName="query" [maxLength]="4000"></textarea>
                 <mat-hint align="end">{{sql.value?.length || 0}}/{{sql.maxLength}}</mat-hint>
+                <mat-error>Este campo é obrigatorio</mat-error>
               </mat-form-field>
             </form>
           </mat-card-content>

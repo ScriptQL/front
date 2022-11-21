@@ -66,3 +66,8 @@ form {
 .mat-tab-header {
   margin-bottom: 16px;
 }
+
+.snack-error {
+  color: var(--text-primary);
+  background: var(--color-error);
+}
